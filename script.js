@@ -82,6 +82,8 @@
     if (name === currentPage) return;
     const from = pages[currentPage];
     const to = pages[name];
+    // NO hidup di <body> saat kabur, jadi harus disembunyikan manual saat pindah halaman
+    if (from === pages.ask) noBtn.style.display = 'none';
     currentPage = name;
 
     const swap = () => {
@@ -259,6 +261,7 @@
   window.addEventListener('orientationchange', () => setTimeout(clampNo, 200));
 
   function resetNo() {
+    noBtn.style.display = '';
     if (dodge.active) {
       noBtn.classList.remove('is-fleeing');
       noBtn.style.transform = '';
