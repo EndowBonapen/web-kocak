@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffd6e6">
+  <title>Ngupi Yuk, Aliza!</title>
+  <meta name="description" content="Undangan ngopi spesial buat Aliza di wilayah Bekasi.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dekorasi latar (sparkle, bintang, bubble, doodle) diisi oleh script.js -->
+  <div class="deco" id="deco" aria-hidden="true"></div>
+
+  <main class="stage">
+
+    <!-- ============ HALAMAN 1: PERTANYAAN ============ -->
+    <section class="page card is-active" id="page-ask" aria-labelledby="ask-title">
+      <svg class="mascot" id="mascot" viewBox="0 0 120 120" role="img" aria-label="Cangkir kopi lucu">
+        <g class="steam" fill="none" stroke-linecap="round" stroke-width="4">
+          <path d="M44 34 q-6 -8 0 -14 q6 -6 0 -14"/>
+          <path d="M60 34 q-6 -8 0 -14 q6 -6 0 -14"/>
+          <path d="M76 34 q-6 -8 0 -14 q6 -6 0 -14"/>
+        </g>
+        <ellipse cx="58" cy="108" rx="42" ry="7" class="m-saucer"/>
+        <path d="M86 58 h7 a13 13 0 0 1 0 26 h-10" class="m-handle" fill="none" stroke-width="7" stroke-linecap="round"/>
+        <path d="M22 48 h72 v26 a32 32 0 0 1 -32 32 h-8 a32 32 0 0 1 -32 -32 z" class="m-cup"/>
+        <path d="M22 48 h72 v8 h-72 z" class="m-rim"/>
+        <circle cx="46" cy="76" r="4.2" class="m-eye"/>
+        <circle cx="70" cy="76" r="4.2" class="m-eye"/>
+        <ellipse cx="37" cy="86" rx="6" ry="3.6" class="m-cheek"/>
+        <ellipse cx="79" cy="86" rx="6" ry="3.6" class="m-cheek"/>
+        <path d="M52 84 q6 7 12 0" class="m-smile" fill="none" stroke-width="3.4" stroke-linecap="round"/>
+      </svg>
+
+      <h1 id="ask-title" class="title" tabindex="-1">
+        <span class="name">Alizaa</span>, gasss ayo ngupi di wilayah Bekasi ☕
+      </h1>
+
+      <div class="actions" id="actions">
+        <button type="button" class="btn btn-yes" id="btn-yes">YES!</button>
+        <span class="no-slot" id="no-slot">
+          <button type="button" class="btn btn-no" id="btn-no" aria-label="NO (tombolnya suka kabur)">NO</button>
+        </span>
+      </div>
+
+      <p class="hint" id="hint" aria-live="polite">Yakin mau pilih NO? Coba lagi deh 😝</p>
+    </section>
+
+    <!-- ============ HALAMAN 2: PILIH TANGGAL ============ -->
+    <section class="page card card-wide" id="page-date" aria-labelledby="date-title">
+      <h2 id="date-title" class="title title-sm" tabindex="-1">YAYYY! Kapan kita ngupi? ☕</h2>
+      <p class="sub">Okay, sekarang pilih tanggalnya yaa!</p>
+
+      <div class="calendar" id="calendar">
+        <div class="cal-head">
+          <button type="button" class="cal-nav" id="cal-prev" aria-label="Bulan sebelumnya">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="cal-title" id="cal-title" aria-live="polite"></div>
+          <button type="button" class="cal-nav" id="cal-next" aria-label="Bulan berikutnya">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="cal-week" aria-hidden="true">
+          <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
+        </div>
+        <div class="cal-grid" id="cal-grid" role="group" aria-label="Pilih tanggal"></div>
+      </div>
+
+      <div class="picked">
+        <span class="picked-label">Tanggal pilihanmu</span>
+        <output class="picked-value is-empty" id="picked-value" for="cal-grid">DD/MM/YYYY</output>
+      </div>
+
+      <p class="msg" id="date-msg" role="alert"></p>
+
+      <button type="button" class="btn btn-yes btn-block" id="btn-pick">Pilih Tanggal Ini ✨</button>
+      <p class="tiny">Hanya tahun 2026 &middot; tanggal yang sudah lewat nggak bisa dipilih</p>
+    </section>
+
+    <!-- ============ HALAMAN 3: KONFIRMASI + WHATSAPP ============ -->
+    <section class="page card" id="page-done" aria-labelledby="done-title">
+      <div class="done-cup" aria-hidden="true">☕</div>
+      <h2 id="done-title" class="title title-sm" tabindex="-1">YAYYY! Kita jadi ngupi! ☕</h2>
+
+      <ul class="details">
+        <li><span>Tanggal pilihan Aliza</span><strong id="done-date">-</strong></li>
+        <li><span>Lokasi</span><strong>Bekasi</strong></li>
+      </ul>
+
+      <div class="contact">
+        <div class="contact-name">Pemuda Babelan</div>
+        <div class="contact-wa">WhatsApp: <strong>085716405001</strong></div>
+      </div>
+
+      <a class="btn btn-wa btn-block" id="btn-wa" href="https://wa.me/6285716405001" target="_blank" rel="noopener noreferrer">
+        Kirim Konfirmasi ke WhatsApp 💬
+      </a>
+      <p class="tiny">WhatsApp akan terbuka dengan pesan yang sudah terisi. Kamu tetap perlu menekan tombol Send di sana ya.</p>
+
+      <button type="button" class="btn btn-ghost btn-block" id="btn-home">Kembali ke Beranda</button>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

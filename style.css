@@ -1,0 +1,498 @@
+/* =========================================================
+   Ngupi Yuk, Aliza! — pink aesthetic
+   ========================================================= */
+
+:root {
+  --pink-25:  #fffafc;
+  --pink-50:  #fff4f8;
+  --pink-100: #ffe8f1;
+  --pink-200: #ffd3e4;
+  --pink-300: #ffb5d2;
+  --pink-400: #ff8cba;
+  --pink-500: #f2589a;
+  --pink-600: #de3a7f;
+  --pink-700: #b82565;
+  --ink:      #6a2a4b;
+  --ink-soft: #9b4d75;
+
+  --font-display: "Fredoka", ui-rounded, "SF Pro Rounded", "Trebuchet MS", system-ui, sans-serif;
+  --font-body:    "Nunito", ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-card: 36px;
+  --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-soft: cubic-bezier(.22, .8, .3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 12% 8%,  var(--pink-200) 0, transparent 38%),
+    radial-gradient(circle at 92% 18%, #ffe3ef 0, transparent 34%),
+    radial-gradient(circle at 80% 92%, var(--pink-200) 0, transparent 40%),
+    radial-gradient(circle at 8% 88%,  #ffe3ef 0, transparent 36%),
+    var(--pink-50);
+  background-attachment: fixed;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* pola titik halus */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(242, 88, 154, .13) 1.6px, transparent 1.7px);
+  background-size: 26px 26px;
+}
+
+button, a { font: inherit; }
+button { cursor: pointer; }
+
+/* ---------- Layout ---------- */
+.stage {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+           max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+
+.card {
+  width: min(100%, 520px);
+  padding: clamp(24px, 5vw, 44px) clamp(18px, 5vw, 40px);
+  text-align: center;
+  background: rgba(255, 255, 255, .86);
+  border: 3px solid var(--pink-100);
+  border-radius: var(--radius-card);
+  box-shadow:
+    0 6px 0 var(--pink-200),
+    0 26px 50px -18px rgba(242, 88, 154, .38);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.card-wide { width: min(100%, 470px); }
+
+/* ---------- Transisi halaman ---------- */
+.page { display: none; }
+.page.is-active { display: block; animation: page-in .65s var(--ease-pop); }
+.page.is-leaving { display: block; animation: page-out .28s ease-in forwards; pointer-events: none; }
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(26px) scale(.92); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes page-out {
+  to { opacity: 0; transform: translateY(-14px) scale(.95); }
+}
+
+/* ---------- Tipografi ---------- */
+.title {
+  margin: 14px 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 7.4vw, 3.1rem);
+  line-height: 1.14;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  outline: none;
+  text-wrap: balance;
+}
+.title-sm { font-size: clamp(1.7rem, 6.2vw, 2.4rem); margin-top: 4px; }
+
+.name {
+  color: var(--pink-600);
+  background: linear-gradient(transparent 62%, var(--pink-200) 62% 92%, transparent 92%);
+  padding: 0 .12em;
+}
+
+.sub {
+  margin: 10px 0 18px;
+  font-size: clamp(1rem, 3.6vw, 1.12rem);
+  color: var(--ink-soft);
+}
+
+.hint {
+  margin: 20px 0 0;
+  min-height: 1.5em;
+  font-size: clamp(.9rem, 3.4vw, 1rem);
+  color: var(--ink-soft);
+}
+.hint.pop { animation: hint-pop .4s var(--ease-pop); }
+@keyframes hint-pop {
+  from { opacity: 0; transform: translateY(6px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+.tiny {
+  margin: 12px 0 0;
+  font-size: .82rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* ---------- Tombol ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 18px;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 12px 34px;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1;
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background-color .2s, box-shadow .2s, color .2s, border-color .2s;
+}
+.btn:focus-visible { outline: 4px solid rgba(242, 88, 154, .4); outline-offset: 3px; }
+
+.btn-yes {
+  color: #fff;
+  background: linear-gradient(180deg, #ff6fa9 0%, var(--pink-600) 100%);
+  border-color: var(--pink-600);
+  box-shadow: 0 6px 0 var(--pink-700), 0 14px 22px -8px rgba(222, 58, 127, .55);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .12);
+  transform: translateY(var(--lift, 0)) scale(var(--s, 1));
+  transition: transform .35s var(--ease-pop), box-shadow .2s, filter .2s;
+}
+.btn-yes:hover  { --lift: -3px; filter: brightness(1.05); }
+.btn-yes:active { --lift: 4px; box-shadow: 0 2px 0 var(--pink-700), 0 6px 12px -6px rgba(222, 58, 127, .55); }
+
+.btn-no {
+  color: var(--pink-600);
+  background: #fff;
+  border-color: var(--pink-300);
+  box-shadow: 0 6px 0 var(--pink-200);
+  padding-inline: 30px;
+}
+.btn-no:hover { background: var(--pink-50); border-color: var(--pink-400); }
+
+/* Slot menjaga ruang tombol NO saat dia kabur */
+.no-slot { display: inline-block; }
+
+/* Saat kabur: dipindah ke <body>, posisi fixed, digerakkan dengan transform */
+.btn-no.is-fleeing {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  margin: 0;
+  will-change: transform;
+  transition: transform .34s var(--ease-pop), background-color .2s, border-color .2s;
+}
+
+.btn-block { width: 100%; margin-top: 8px; }
+.btn-ghost {
+  margin-top: 14px;
+  color: var(--pink-600);
+  background: #fff;
+  border-color: var(--pink-300);
+  box-shadow: 0 5px 0 var(--pink-200);
+}
+.btn-ghost:hover { background: var(--pink-50); }
+.btn-ghost:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--pink-200); }
+
+.btn-wa {
+  margin-top: 4px;
+  color: #fff;
+  background: linear-gradient(180deg, #ff7db3 0%, var(--pink-500) 100%);
+  border-color: var(--pink-500);
+  box-shadow: 0 6px 0 var(--pink-700), 0 14px 22px -8px rgba(222, 58, 127, .5);
+  font-size: clamp(1.05rem, 4.4vw, 1.25rem);
+  padding-inline: 20px;
+}
+.btn-wa:hover  { filter: brightness(1.05); transform: translateY(-2px); }
+.btn-wa:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--pink-700); }
+
+/* ---------- Maskot cangkir ---------- */
+.mascot {
+  width: clamp(92px, 24vw, 124px);
+  height: auto;
+  overflow: visible;
+  animation: bob 3.2s ease-in-out infinite;
+}
+.m-cup    { fill: #ffc4dc; stroke: var(--pink-400); stroke-width: 3.5; stroke-linejoin: round; }
+.m-rim    { fill: var(--pink-400); }
+.m-handle { stroke: var(--pink-400); }
+.m-saucer { fill: var(--pink-200); }
+.m-eye    { fill: var(--ink); }
+.m-cheek  { fill: #ff8fba; opacity: .55; }
+.m-smile  { stroke: var(--ink); }
+.steam path {
+  stroke: var(--pink-300);
+  stroke-dasharray: 60;
+  animation: steam 2.6s ease-in-out infinite;
+}
+.steam path:nth-child(2) { animation-delay: .5s; }
+.steam path:nth-child(3) { animation-delay: 1s; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-8px) rotate(2deg); }
+}
+@keyframes steam {
+  0%   { stroke-dashoffset: 60; opacity: 0; transform: translateY(6px); }
+  40%  { opacity: .95; }
+  100% { stroke-dashoffset: -60; opacity: 0; transform: translateY(-6px); }
+}
+
+.done-cup {
+  font-size: clamp(3.2rem, 14vw, 4.4rem);
+  line-height: 1;
+  animation: bob 2.6s ease-in-out infinite;
+}
+
+/* ---------- Kalender ---------- */
+.calendar {
+  padding: 12px clamp(6px, 2.4vw, 14px) 14px;
+  background: var(--pink-25);
+  border: 3px solid var(--pink-100);
+  border-radius: 28px;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+.calendar.shake { animation: shake .45s; }
+
+.cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.cal-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 4.6vw, 1.3rem);
+  color: var(--ink);
+}
+.cal-nav {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--pink-600);
+  background: var(--pink-100);
+  border: 0;
+  border-radius: 50%;
+  transition: background-color .2s, transform .2s var(--ease-pop), opacity .2s;
+  touch-action: manipulation;
+}
+.cal-nav svg { width: 20px; height: 20px; }
+.cal-nav:hover:not(:disabled) { background: var(--pink-200); transform: scale(1.08); }
+.cal-nav:active:not(:disabled) { transform: scale(.92); }
+.cal-nav:disabled { opacity: .35; cursor: not-allowed; }
+.cal-nav:focus-visible { outline: 3px solid rgba(242, 88, 154, .45); outline-offset: 2px; }
+
+.cal-week, .cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: clamp(2px, 1vw, 6px);
+}
+.cal-week span {
+  padding: 4px 0 6px;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--pink-500);
+}
+
+.day {
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(.95rem, 3.8vw, 1.1rem);
+  color: var(--ink);
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  touch-action: manipulation;
+  transition: background-color .15s, transform .2s var(--ease-pop), color .15s;
+}
+.day:hover:not(:disabled):not(.is-selected) { background: var(--pink-100); transform: scale(1.1); }
+.day:focus-visible { outline: 3px solid rgba(242, 88, 154, .5); outline-offset: 1px; }
+.day:disabled { color: #dfbccd; background: transparent; cursor: not-allowed; text-decoration: line-through; text-decoration-color: rgba(222, 58, 127, .22); }
+.day.is-today:not(.is-selected) { border: 2px dashed var(--pink-400); }
+.day.is-selected {
+  color: #fff;
+  background: linear-gradient(180deg, #ff6fa9, var(--pink-600));
+  box-shadow: 0 4px 0 var(--pink-700);
+  animation: pick-pop .4s var(--ease-pop);
+}
+.cal-spacer { visibility: hidden; }
+.cal-empty { grid-column: 1 / -1; padding: 24px 8px; color: var(--ink-soft); }
+
+@keyframes pick-pop { 0% { transform: scale(.7); } 100% { transform: scale(1); } }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(7px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(3px); }
+}
+
+.picked {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  margin: 18px 0 0;
+}
+.picked-label { font-size: .92rem; color: var(--ink-soft); }
+.picked-value {
+  padding: 8px 18px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: .04em;
+  color: var(--pink-700);
+  background: var(--pink-100);
+  border: 2px dashed var(--pink-300);
+  border-radius: 999px;
+}
+.picked-value.is-empty { color: #cf8fae; }
+.picked-value.bump { animation: pick-pop .4s var(--ease-pop); }
+
+.msg {
+  min-height: 1.4em;
+  margin: 10px 0 8px;
+  font-size: .95rem;
+  color: var(--pink-700);
+}
+
+/* ---------- Halaman konfirmasi ---------- */
+.details {
+  list-style: none;
+  margin: 20px 0 16px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.details li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px;
+  background: var(--pink-50);
+  border: 2px dashed var(--pink-200);
+  border-radius: 20px;
+}
+.details span   { font-size: .88rem; color: var(--ink-soft); }
+.details strong { font-family: var(--font-display); font-weight: 600; font-size: 1.45rem; color: var(--pink-700); }
+
+.contact {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  background: linear-gradient(180deg, #fff, var(--pink-50));
+  border: 3px solid var(--pink-100);
+  border-radius: 22px;
+}
+.contact-name { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: var(--ink); }
+.contact-wa   { margin-top: 2px; color: var(--ink-soft); }
+.contact-wa strong { color: var(--pink-700); letter-spacing: .03em; }
+
+/* ---------- Dekorasi latar ---------- */
+.deco {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.deco .d {
+  position: absolute;
+  color: var(--c, var(--pink-300));
+  opacity: .8;
+  animation: drift var(--dur, 7s) ease-in-out var(--delay, 0s) infinite;
+}
+.deco .d svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.deco .d.twinkle svg { animation: twinkle var(--tw, 2.6s) ease-in-out var(--delay, 0s) infinite; }
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%      { transform: translate(var(--dx, 8px), var(--dy, -16px)) rotate(var(--rot, 12deg)); }
+}
+@keyframes twinkle {
+  0%, 100% { transform: scale(1) rotate(0); opacity: 1; }
+  50%      { transform: scale(.55) rotate(30deg); opacity: .5; }
+}
+
+/* ---------- Confetti (sparkle & bubble) ---------- */
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: hidden;
+  pointer-events: none;
+}
+.confetti i {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  width: var(--sz, 18px);
+  height: var(--sz, 18px);
+  color: var(--c, var(--pink-400));
+  opacity: 0;
+  animation: burst 1.7s cubic-bezier(.15, .7, .3, 1) var(--d, 0s) forwards;
+}
+.confetti svg { display: block; width: 100%; height: 100%; }
+
+@keyframes burst {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(.2) rotate(0); }
+  15%  { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y) + 90px)) scale(1) rotate(var(--r)); }
+}
+
+/* ---------- Layar kecil ---------- */
+@media (max-width: 380px) {
+  .btn { padding-inline: 26px; font-size: 1.2rem; }
+  .actions { gap: 14px; }
+}
+
+/* ---------- Kurangi gerakan ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
